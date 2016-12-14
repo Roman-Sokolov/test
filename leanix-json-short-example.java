@@ -35,7 +35,7 @@ public class JsonToLeanIXImporter {
 	private Service createOrUpdateService(JSONObject json) throws ApiException {
 		String name = json.getString("name");
 		List<Service> services = servicesApi.getServices(true, name);
-    // find if such Application already exists in LeanIX
+    		// find if such Application already exists in LeanIX
 		Service service = null;
 		for (Service existingService : services) {
 			if (name.equals(existingService.getName())) {
@@ -44,13 +44,13 @@ public class JsonToLeanIXImporter {
 			}
 		}
 		if (service == null) {
-      // create a new Application
+      			// create a new Application
 			service = new Service();
 			service.setName(name);
 			service.setDescription(json.toString());
 			service = servicesApi.createService(service);
 		} else {
-      // update an existing Application
+      			// update an existing Application
 			service.setName(name);
 			service.setDescription(json.toString());
 			service = servicesApi.updateService(service.getID(), service);
